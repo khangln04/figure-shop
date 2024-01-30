@@ -31,19 +31,19 @@ public class DAOAccount extends DBContext {
         }
     }
 
-    public void setAccountStatus(int id, int status) {
-        String query = "UPDATE [dbo].[Account]\n"
-                + "   SET [isAdmin] = ?\n"
-                + " WHERE id = ?";
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, status);
-            ps.setInt(2, id);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-
-        }
+public void setAccountStatus(int id, int status) {
+    String query = "UPDATE [dbo].[Account]\n"
+            + "   SET [isAdmin] = ?\n"
+            + " WHERE id = ?";
+    try (PreparedStatement ps = connection.prepareStatement(query)) {
+        ps.setInt(1, status);
+        ps.setInt(2, id);
+        ps.executeUpdate();
+    } catch (SQLException e) {
+        // Xử lý ngoại lệ ở đây
     }
+}
+
 
     public List<Account> getCustomerAccount() {
 
